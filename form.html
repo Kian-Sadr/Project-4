@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Information Form</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
 
+    <h1>User Information Form</h1>
+
+    <a href="records.html">View Records</a>
+
+    <form id="userForm">
+
+        <fieldset>
+
+            <legend>User Survey</legend>
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName">
+
+            <br><br>
+
+            <p>Favorite Platform:</p>
+
+            <input type="radio" id="pc"
+                   name="platform"
+                   value="PC">
+
+            <label for="pc">PC</label>
+
+            <input type="radio" id="console"
+                   name="platform"
+                   value="Console">
+
+            <label for="console">Console</label>
+
+            <br><br>
+
+            <label for="major">
+                Major:
+            </label>
+
+            <select id="major" name="major">
+                <option value="">Select One</option>
+                <option>Computer Science</option>
+                <option>Engineering</option>
+                <option>Business</option>
+                <option>Other</option>
+            </select>
+
+            <br><br>
+
+            <label for="year">
+                Class Year:
+            </label>
+
+            <input type="number"
+                   id="year"
+                   name="year">
+
+            <br><br>
+
+            <label for="satisfaction">
+                Satisfaction:
+            </label>
+
+            <input type="range"
+                   id="satisfaction"
+                   name="satisfaction"
+                   min="1"
+                   max="10">
+
+            <br><br>
+
+            <label for="comments">
+                Comments:
+            </label>
+
+            <br>
+
+            <textarea id="comments"
+                      name="comments"
+                      rows="6"
+                      cols="40"></textarea>
+
+            <br><br>
+
+            <button type="submit">
+                Submit
+            </button>
+
+        </fieldset>
+
+    </form>
+
+  </body>
+</html>
