@@ -1,6 +1,6 @@
 const createButton = document.getElementById("createAccountButton");
 
-createBtn.addEventListener("click", () => {
+createButton.addEventListener("click", () => {
   
   const username = document.getElementById("newUsername").value;
 
