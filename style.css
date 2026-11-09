@@ -1,1 +1,99 @@
+/* Body */
 
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 25px;
+    background-color: #f4f4f4;
+    color: #000000;
+}
+
+/* Headings */
+
+h1 {
+    color: navy;
+}
+
+/* Form inputs */
+
+input,
+select,
+textarea,
+button {
+    font-size: 16px;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Text area */
+
+textarea {
+    resize: vertical;
+}
+
+/* Fieldsets */
+
+fieldset {
+    background-color: white;
+    border: 2px solid navy;
+    padding: 20px;
+    max-width: 700px;
+}
+
+legend {
+    font-weight: bold;
+    color: navy;
+}
+
+/* Buttons */
+
+button {
+    background-color: navy;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+/* Links */
+
+a {
+    color: blue;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Records table */
+
+table {
+    border-collapse: collapse;
+    background-color: white;
+    width: 75%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: navy;
+    color: white;
+}
+
+/* Labels */
+
+label {
+    font-weight: bold;
+}
