@@ -1,6 +1,6 @@
 const usernameInput = document.getElementById("username");
 const rememberBox = document.getElementById("remember");
-const loginBtn = document.getElementById("loginBtn");
+const loginButton = document.getElementById("loginButton");
 
 window.addEventListener("load", () => {
   
@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
   }
 });
 
-loginBtn.addEventListener("click", () => {
+loginButton.addEventListener("click", () => {
   
   if (rememberBox.checked) {
     
