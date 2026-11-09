@@ -1,12 +1,18 @@
-const createButton = document.getElementById("createAccountButton");
+const createButton =
+    document.getElementById("createAccountButton");
 
 createButton.addEventListener("click", async () => {
-  
-  const username = document.getElementById("newUsername").value;
 
-  const password = document.getElementById("newPassword").value;
+    const username =
+        document.getElementById("newUsername").value;
 
-    if (username.trim() === "" || password.trim() === "") {
+    const password =
+        document.getElementById("newPassword").value;
+
+    if (
+        username.trim() === "" ||
+        password.trim() === ""
+    ) {
         alert("Username and password are required.");
         return;
     }
@@ -18,8 +24,7 @@ createButton.addEventListener("click", async () => {
             {
                 method: "POST",
                 headers: {
-                    "Content-Type":
-                        "application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     username,
@@ -28,16 +33,27 @@ createButton.addEventListener("click", async () => {
             }
         );
 
-        const data =await response.json();
+        const data = await response.json();
 
-        alert(data.message);
+        console.log(data);
+
+        if (response.ok) {
+
+            alert(data.message);
+
+        } else {
+
+            alert("Server Error: " + data.error);
+
+        }
 
     }
-    catch(error) {
+    catch (error) {
 
-      console.error(error);
+        console.error(error);
 
-      alert("Unable to contact server.");
-  }
+        alert("Unable to contact server.");
+
+    }
 
 });
