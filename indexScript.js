@@ -27,5 +27,4 @@ loginBtn.addEventListener("click", () => {
 
     localStorage.setItem("remember", "false");
   }
-
 });
