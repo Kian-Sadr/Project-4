@@ -2,18 +2,23 @@ app.post("/createAccount", (req, res) => {
 
     try {
 
+        console.log("Route reached");
+        console.log(req.body);
+
         const { username, password } = req.body;
 
-        const accountsFile =
-            "./data/accounts.json";
+        const accountsFile = "./data/accounts.json";
 
-        const accounts =
-            JSON.parse(
-                fs.readFileSync(
-                    accountsFile,
-                    "utf8"
-                )
-            );
+        console.log("Reading accounts");
+
+        const accounts = JSON.parse(
+            fs.readFileSync(
+                accountsFile,
+                "utf8"
+            )
+        );
+
+        console.log("Accounts loaded");
 
         const id = Date.now();
 
@@ -24,6 +29,8 @@ app.post("/createAccount", (req, res) => {
             accountFile: `${id}.json`
         });
 
+        console.log("Writing accounts");
+
         fs.writeFileSync(
             accountsFile,
             JSON.stringify(
@@ -32,6 +39,8 @@ app.post("/createAccount", (req, res) => {
                 2
             )
         );
+
+        console.log("Writing user file");
 
         fs.writeFileSync(
             `./data/users/${id}.json`,
@@ -50,6 +59,8 @@ app.post("/createAccount", (req, res) => {
             )
         );
 
+        console.log("Success");
+
         res.json({
             message: `Account created with ID ${id}`
         });
@@ -57,10 +68,13 @@ app.post("/createAccount", (req, res) => {
     }
     catch (error) {
 
+        console.error("CREATE ACCOUNT ERROR:");
         console.error(error);
 
         res.status(500).json({
             error: error.message
         });
+
     }
+
 });
