@@ -1,3 +1,27 @@
+const fs = require("fs");
+const express = require("express");
+const path = require("path");
+
+const app = express();
+
+// Create users folder if it doesn't exist
+if (!fs.existsSync("./data/users")) {
+    fs.mkdirSync("./data/users", {
+        recursive: true
+    });
+}
+
+app.use(express.json());
+app.use(express.static(__dirname));
+
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "index.html")
+    );
+});
+
 app.post("/createAccount", (req, res) => {
 
     try {
@@ -5,18 +29,21 @@ app.post("/createAccount", (req, res) => {
         console.log("Route reached");
         console.log(req.body);
 
-        const { username, password } = req.body;
+        const { username, password } =
+            req.body;
 
-        const accountsFile = "./data/accounts.json";
+        const accountsFile =
+            "./data/accounts.json";
 
         console.log("Reading accounts");
 
-        const accounts = JSON.parse(
-            fs.readFileSync(
-                accountsFile,
-                "utf8"
-            )
-        );
+        const accounts =
+            JSON.parse(
+                fs.readFileSync(
+                    accountsFile,
+                    "utf8"
+                )
+            );
 
         console.log("Accounts loaded");
 
@@ -77,4 +104,8 @@ app.post("/createAccount", (req, res) => {
 
     }
 
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
 });
