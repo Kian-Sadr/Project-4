@@ -1,111 +1,103 @@
-const fs = require("fs");
-const express = require("express");
-const path = require("path");
+const usernameInput =
+    document.getElementById("username");
 
-const app = express();
+const rememberBox =
+    document.getElementById("remember");
 
-// Create users folder if it doesn't exist
-if (!fs.existsSync("./data/users")) {
-    fs.mkdirSync("./data/users", {
-        recursive: true
-    });
-}
+const loginBtn =
+    document.getElementById("loginButton");
 
-app.use(express.json());
-app.use(express.static(__dirname));
+window.addEventListener("load", () => {
 
-const PORT = process.env.PORT || 3000;
+    const savedRemember =
+        localStorage.getItem("remember");
 
-app.get("/", (req, res) => {
-    res.sendFile(
-        path.join(__dirname, "index.html")
-    );
+    if (savedRemember === "true") {
+
+        rememberBox.checked = true;
+
+        usernameInput.value =
+            localStorage.getItem("username") || "";
+    }
+
 });
 
-app.post("/createAccount", (req, res) => {
+loginBtn.addEventListener("click", async () => {
+
+    const username =
+        document.getElementById("username").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    if (rememberBox.checked) {
+
+        localStorage.setItem(
+            "username",
+            username
+        );
+
+        localStorage.setItem(
+            "remember",
+            "true"
+        );
+
+    } else {
+
+        localStorage.removeItem(
+            "username"
+        );
+
+        localStorage.setItem(
+            "remember",
+            "false"
+        );
+
+    }
 
     try {
 
-        console.log("Route reached");
-        console.log(req.body);
-
-        const { username, password } =
-            req.body;
-
-        const accountsFile =
-            "./data/accounts.json";
-
-        console.log("Reading accounts");
-
-        const accounts =
-            JSON.parse(
-                fs.readFileSync(
-                    accountsFile,
-                    "utf8"
-                )
+        const response =
+            await fetch(
+                "/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
+                }
             );
 
-        console.log("Accounts loaded");
+        const data =
+            await response.json();
 
-        const id = Date.now();
+        if (data.success) {
 
-        accounts.push({
-            id,
-            username,
-            password,
-            accountFile: `${id}.json`
-        });
+            window.location.href =
+                "form.html";
 
-        console.log("Writing accounts");
+        } else {
 
-        fs.writeFileSync(
-            accountsFile,
-            JSON.stringify(
-                accounts,
-                null,
-                2
-            )
-        );
+            alert(
+                "Invalid username or password."
+            );
 
-        console.log("Writing user file");
-
-        fs.writeFileSync(
-            `./data/users/${id}.json`,
-            JSON.stringify(
-                {
-                    id,
-                    fullName: "",
-                    platform: "",
-                    major: "",
-                    year: "",
-                    satisfaction: "",
-                    comments: ""
-                },
-                null,
-                2
-            )
-        );
-
-        console.log("Success");
-
-        res.json({
-            message: `Account created with ID ${id}`
-        });
+        }
 
     }
     catch (error) {
 
-        console.error("CREATE ACCOUNT ERROR:");
         console.error(error);
 
-        res.status(500).json({
-            error: error.message
-        });
+        alert(
+            "Login failed."
+        );
 
     }
 
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
 });
